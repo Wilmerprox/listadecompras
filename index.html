@@ -1,0 +1,727 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras Mejorada</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="/manifest.json">
+    <script src="script.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then(() => {
+                console.log('Service Worker Registered');
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Lista de Compras Mejorada</h1>
+    <form id="shopping-form">
+        <table id="shopping-list">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Unidad de medida</th>
+                    <th>Precio unitario</th>
+                    <th>Precio total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <select onchange="updateProducts(this)">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="frutas">Frutas</option>
+                            <option value="granos">Granos</option>
+                            <option value="abarrotes">Abarrotes</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="esencias">Esencias</option>
+                            <option value="frutos_secos">Frutos secos</option>
+                            <option value="otro">Otro (Escriba su producto)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                        <input type="text" style="display:none;" placeholder="Ingrese producto personalizado">
+                    </td>
+                    <td><input type="number" min="1" value="1" oninput="validateInput(this)"></td>
+                    <td>
+                        <select>
+                            <option value="kg">Kilogramos</option>
+                            <option value="g">Gramos</option>
+                            <option value="l">Litros</option>
+                            <option value="ml">Mililitros</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </td>
+                    <td><input type="number" step="0.01" min="0" value="0.00" oninput="validateInput(this)"></td>
+                    <td><input type="text" readonly></td>
+                </tr>
+    
+            </tbody>
+        </table>
+        <div class="total-container">
+            <p><strong>Total General: </strong><span id="general-total">0.00</span></p>
+        </div>
+        <div class="buttons-container">
+            <button type="button" onclick="calculateAllTotals()">Calcular Precios Totales</button>
+            <button type="button" onclick="downloadCSV()">Descargar Lista en CSV</button>
+        </div>
+        <p id="error-message" class="error-message"></p>
+    </form>
+</body>
+</html>
